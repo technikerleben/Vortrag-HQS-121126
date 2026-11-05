@@ -28,8 +28,34 @@ body.idle,body.idle *{cursor:none!important}
 #viewport{position:fixed;inset:0;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center}
 .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:90px 120px}
-.slide.active{display:flex;animation:fade .35s ease both}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+/* ---------- Bewegung: kurz, gerichtet, ruhig ---------- */
+:root{--t:.45s;--ease:cubic-bezier(.22,.7,.2,1)}
+.slide.active{display:flex;z-index:2;animation:inFwd var(--t) var(--ease) both}
+body.dir-back .slide.active{animation-name:inBack}
+.slide.active.anchored{animation-name:fadeIn}
+.slide.leaving{display:flex;z-index:1;animation:fadeOut .26s ease both;pointer-events:none}
+.slide.leaving.anchored{animation:none}
+.slide.leaving.anchored>*:not(.split),.slide.leaving.anchored .split>*:not(figure){animation:fadeOut .2s ease both}
+@keyframes inFwd{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes inBack{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeOut{from{opacity:1}to{opacity:0}}
+/* gestaffelter Aufbau */
+.stag{animation:rise .5s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.qr-box.stag{animation-name:pop}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+/* Akzentlinien zeichnen sich ein */
+.draw{animation:draw .7s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
+@keyframes draw{from{background-size:0 6px}to{background-size:100% 6px}}
+.stag.draw{animation:rise .5s var(--ease) both,draw .7s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 90ms),calc(var(--i,0)*70ms + 260ms)}
+.cover .line.draw,.cover .line.stag.draw{animation:drawLine .7s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 300ms)}
+@keyframes drawLine{from{width:0}to{width:120px}}
+/* Ken Burns nur auf großen Bildfolien */
+.slide.full.active img{animation:kb 14s ease-out both}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.04)}}
+.slide.full{overflow:hidden}
+body.overlay .slide.full.active img{animation-play-state:paused}
 .notes{display:none}
 
 /* ---------- Drei Schriftgrößen (+ Quellenzeile) ---------- */
@@ -80,8 +106,8 @@ figure{margin:0}
 /* Mythen: rechte Bildhälfte verdeckt bis zur Auflösung */
 .myth-art{position:relative;width:760px}
 .myth-art img{display:block;width:100%;border-radius:14px}
-.myth-cover{position:absolute;top:0;right:0;bottom:0;background:var(--paper);transition:opacity .5s ease}
-.slide.steps-done .myth-cover{opacity:0}
+.myth-cover{position:absolute;top:0;right:0;bottom:0;background:var(--paper);transform-origin:right center;transition:transform .7s var(--ease)}
+.slide.steps-done .myth-cover{transform:scaleX(0)}
 .myth .split{gap:70px}
 .myth .h{font-size:74px;margin-bottom:44px}
 .myth .kw{font-size:46px}
@@ -92,7 +118,7 @@ figure{margin:0}
  .tried .kw{font-size:36px;margin-top:22px}
 .tried .sm{font-size:24px;margin:4px 0 0}
 .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:56px}
-.ways>div{border-top:6px solid var(--red);padding-top:22px}
+.ways>div{padding-top:28px;background:linear-gradient(var(--red),var(--red)) left top/100% 6px no-repeat}
 .ways .name{font:400 58px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 14px}
 .ways .kw{font-size:36px;line-height:1.25;margin-bottom:16px}
 .ways .sm{font-size:26px}
@@ -148,6 +174,7 @@ body.dark-slide #progress .bar{background:#FFB98A}
 #black.on{display:block}
 
 /* Folienübersicht (Taste G) */
+#jump,#menu{touch-action:manipulation}
 #jump{position:fixed;inset:0;z-index:50;display:none;background:rgba(15,42,68,.8);padding:4vh 4vw;font-size:16px}
 #jump.open{display:grid;place-items:center}
 .jump-panel{background:var(--paper);border-radius:18px;width:min(1100px,100%);max-height:92vh;overflow:auto;padding:18px 22px 22px}
@@ -198,6 +225,8 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
 .nv-foot b{color:#E6EEF5}
 .nv-warn{color:#FFB98A}
 
+body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{
   html,body{overflow:visible;height:auto;background:white}
   #viewport{position:static}
@@ -387,7 +416,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
 
 <section class="slide" data-title="Wirksamkeit">
   <p class="label">Warum sich das lohnt</p>
-  <h2 class="h" style="font-size:190px;margin-bottom:10px">+7 <em>Monate</em></h2>
+  <h2 class="h" style="font-size:190px;margin-bottom:10px">+<span class="count" data-to="7">7</span> <em>Monate</em></h2>
   <p class="kw">zusätzlicher Lernfortschritt im Schuljahr – bei sehr geringen Kosten.</p>
   <p class="src" style="margin-top:60px;font-size:22px">Education Endowment Foundation (EEF), Teaching and Learning Toolkit: „Metacognition and self-regulation“ · Auswertung von 246 Studien · <a href="https://educationendowmentfoundation.org.uk/education-evidence/teaching-learning-toolkit/metacognition-and-self-regulation">educationendowmentfoundation.org.uk</a></p>
   <aside class="notes">
@@ -440,7 +469,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
   </aside>
 </section>
 
-<section class="slide" data-title="SRL-Turbine" data-section="Die SRL-Turbine">
+<section class="slide" data-anchor="turbine" data-title="SRL-Turbine" data-section="Die SRL-Turbine">
   <div class="split">
     <figure>
       <img class="turbine" src="assets/turbine.png" alt="SRL-Turbine der Universität Zürich">
@@ -468,7 +497,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
   </aside>
 </section>
 
-<section class="slide" data-title="Turbine · Grundbedürfnisse">
+<section class="slide" data-anchor="turbine" data-title="Turbine · Grundbedürfnisse">
   <div class="split">
     <figure>
       <img class="turbine" src="assets/turbine-needs.png" alt="SRL-Turbine – Fokus Grundbedürfnisse">
@@ -496,7 +525,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
   </aside>
 </section>
 
-<section class="slide" data-title="Turbine · Lernprozess">
+<section class="slide" data-anchor="turbine" data-title="Turbine · Lernprozess">
   <div class="split">
     <figure>
       <img class="turbine" src="assets/turbine-process.png" alt="SRL-Turbine – Fokus Lernprozess">
@@ -521,10 +550,10 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
   </aside>
 </section>
 
-<section class="slide" data-title="Turbine · Kompetenzen">
+<section class="slide" data-anchor="turbine" data-title="Turbine · Kompetenzen">
   <div class="split">
     <figure>
-      <img class="turbine big" src="assets/turbine-areas.png" alt="SRL-Turbine – Fokus Kompetenzbereiche">
+      <img class="turbine" src="assets/turbine-areas.png" alt="SRL-Turbine – Fokus Kompetenzbereiche">
       <p class="src">Karlen et al., Universität Zürich · <a href="https://www.selbstreguliertes-lernen.uzh.ch/de/fuer-lehrpersonen/lehrperson-themenbeitraege/was-ist-selbstreguliertes-lernen.html">selbstreguliertes-lernen.uzh.ch</a></p>
     </figure>
     <div>
@@ -771,6 +800,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
   <div class="m-btns">
     <button data-act="prev">◀ Zurück</button><button data-act="jump">☰ Folien</button><button data-act="next">Weiter ▶</button>
     <button data-act="full">⛶ Vollbild</button><button data-act="black">● Schwarz</button><button data-act="notes">✎ Notizen</button>
+    <button data-act="anim" class="wide">⏸ Animation aus</button>
   </div>
   <table>
     <tr><td><kbd>→</kbd> <kbd>Leertaste</kbd></td><td>weiter / aufdecken</td></tr>
@@ -781,6 +811,7 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
     <tr><td><kbd>B</kbd> <kbd>.</kbd></td><td>schwarzer Bildschirm</td></tr>
     <tr><td><kbd>S</kbd></td><td>Sprechernotizen (2. Fenster)</td></tr>
     <tr><td><kbd>M</kbd></td><td>dieses Menü</td></tr>
+    <tr><td><kbd>A</kbd></td><td>Animationen an/aus</td></tr>
     <tr><td colspan="2" class="m-sec">iPad</td></tr>
     <tr><td>Wischen ← →</td><td>weiter / zurück</td></tr>
     <tr><td>Tippen rechts / links</td><td>weiter / zurück</td></tr>
@@ -820,9 +851,41 @@ let index=0;
 function markDone(sl){ sl.classList.toggle('steps-done',!sl.querySelector('.step.hidden')); }
 function setSteps(sl,hidden){ sl.querySelectorAll('.step').forEach(el=>el.classList.toggle('hidden',hidden)); markDone(sl); }
 function stepInfo(){ const all=slides[index].querySelectorAll('.step').length, open=all-slides[index].querySelectorAll('.step.hidden').length; return {all,open}; }
+/* Bewegung: Richtung merken, alte Folie kurz ausblenden, Inhalte gestaffelt aufbauen */
+let navDir=1, leaveTimer;
+const STAG_SEL='.label,.h,.statement,.quote,.kw,.sm,.src,.kw-list>li,.terms>div,.grid3>div,.ways>div,.pairs>*,figure,.myth-art,.stackv .big,.stackv li,.buddy,.qr-box,.mark,.line';
+function animOff(){ return document.body.classList.contains('no-anim'); }
+function stagger(sl,anchored){
+  sl.querySelectorAll('.stag,.draw').forEach(el=>el.classList.remove('stag','draw'));
+  if(animOff()) return;
+  const all=[...sl.querySelectorAll(STAG_SEL)].filter(el=>!el.closest('.notes')&&!el.closest('.step')&&!el.classList.contains('step'));
+  const top=all.filter(el=>!all.some(o=>o!==el&&o.contains(el)));
+  let k=0;
+  top.forEach(el=>{
+    if(anchored&&el.tagName==='FIGURE') return;           // Turbine bleibt stehen
+    el.style.setProperty('--i',Math.min(k++,10));
+    void el.offsetWidth; el.classList.add('stag');
+  });
+  sl.querySelectorAll('.ways>div,.cover .line').forEach((el,j)=>{ el.style.setProperty('--i',j); void el.offsetWidth; el.classList.add('draw'); });
+  const c=sl.querySelector('.count');
+  if(c&&navDir>0){ const to=+c.dataset.to,t0=performance.now(),d=650;
+    const step=t=>{ const p=Math.min(1,(t-t0-250)/d); c.textContent=p<=0?'0':Math.round(to*(1-Math.pow(1-p,3))); if(p<1)requestAnimationFrame(step); };
+    c.textContent='0'; requestAnimationFrame(step); }
+}
 function showSlide(i){
+  const prev=index;
   index=Math.max(0,Math.min(slides.length-1,i));
-  slides.forEach((s,n)=>s.classList.toggle('active',n===index));
+  const from=slides[prev], to=slides[index];
+  const anchored=prev!==index&&from.dataset.anchor&&from.dataset.anchor===to.dataset.anchor;
+  document.body.classList.toggle('dir-back',navDir<0);
+  slides.forEach(s=>s.classList.remove('leaving','anchored'));
+  clearTimeout(leaveTimer);
+  if(prev!==index&&!animOff()){
+    from.classList.add('leaving'); if(anchored){from.classList.add('anchored');to.classList.add('anchored');}
+    leaveTimer=setTimeout(()=>slides.forEach(s=>s.classList.remove('leaving')),480);
+  }
+  slides.forEach((s,n)=>{ s.classList.remove('active'); if(n===index){ void s.offsetWidth; s.classList.add('active'); } });
+  stagger(to,anchored);
   markDone(slides[index]);
   bar.style.width=((index+1)/slides.length*100)+'%';
   document.body.classList.toggle('dark-slide','dark' in slides[index].dataset);
@@ -832,10 +895,17 @@ function showSlide(i){
 function forward(){
   const nx=slides[index].querySelector('.step.hidden');
   if(nx){ nx.classList.remove('hidden'); markDone(slides[index]); broadcast(); return; }
-  if(index<slides.length-1){ setSteps(slides[index+1],true); showSlide(index+1); }
+  if(index<slides.length-1){ navDir=1; setSteps(slides[index+1],true); showSlide(index+1); }
 }
-function backward(){ if(index>0){ setSteps(slides[index-1],false); showSlide(index-1); } }
-function goTo(i){ i=Math.max(0,Math.min(slides.length-1,i)); if(i===index)return; setSteps(slides[i],i>index); showSlide(i); }
+function backward(){ if(index>0){ navDir=-1; setSteps(slides[index-1],false); showSlide(index-1); } }
+function goTo(i){ i=Math.max(0,Math.min(slides.length-1,i)); if(i===index)return; navDir=i>index?1:-1; setSteps(slides[i],i>index); showSlide(i); }
+function toggleAnim(){
+  const off=!document.body.classList.contains('no-anim');
+  document.body.classList.toggle('no-anim',off);
+  try{ localStorage.setItem('srl-no-anim',off?'1':'0'); }catch(_){}
+  const b=document.querySelector('#menu [data-act=anim]'); if(b) b.textContent=off?'▶ Animation an':'⏸ Animation aus';
+}
+try{ if(localStorage.getItem('srl-no-anim')==='1'){ document.body.classList.add('no-anim'); const b=document.querySelector('#menu [data-act=anim]'); if(b) b.textContent='▶ Animation an'; } }catch(_){}
 
 /* ---------- Folienübersicht (G) ---------- */
 const jump=document.getElementById('jump'),jumpGrid=document.getElementById('jumpGrid'),jumpNum=document.getElementById('jumpNum');
@@ -849,9 +919,9 @@ function openJump(byTouch){
     b.addEventListener('click',()=>{closeJump();goTo(i);});
     li.appendChild(b); jumpGrid.appendChild(li);
   });
-  jump.classList.add('open'); jumpNum.value=''; if(!byTouch) jumpNum.focus();
+  jump.classList.add('open'); document.body.classList.add('overlay'); jumpNum.value=''; if(!byTouch) jumpNum.focus();
 }
-function closeJump(){ jump.classList.remove('open'); jumpNum.blur(); }
+function closeJump(){ jump.classList.remove('open'); document.body.classList.remove('overlay'); jumpNum.blur(); }
 jump.addEventListener('click',e=>{ if(e.target===jump) closeJump(); });
 jumpNum.addEventListener('keydown',e=>{
   if(e.key==='Enter'){ const n=parseInt(jumpNum.value,10); if(n>=1&&n<=slides.length){closeJump();goTo(n-1);} e.preventDefault(); }
@@ -888,6 +958,7 @@ menu.addEventListener('click',e=>{
   if(a==='prev')backward(); if(a==='next')forward(); if(a==='jump'){toggleMenu(false);openJump(true);}
   if(a==='full')toggleFullscreen(); if(a==='black'){toggleMenu(false);document.getElementById('black').classList.add('on');}
   if(a==='notes')openNotes();
+  if(a==='anim')toggleAnim();
   b.blur();                                  // Leertaste soll danach weiterblättern, nicht den Knopf erneut auslösen
 });
 
@@ -908,6 +979,7 @@ document.addEventListener('keydown',e=>{
   else if(k==='b'||k==='B'||k==='.'){ document.getElementById('black').classList.toggle('on'); }
   else if(k==='s'||k==='S'){ e.preventDefault(); openNotes(); }
   else if(k==='m'||k==='M'){ e.preventDefault(); toggleMenu(); }
+  else if(k==='a'||k==='A'){ e.preventDefault(); toggleAnim(); }
   else if(k==='Escape'&&menu.classList.contains('open')){ toggleMenu(false); }
 });
 
