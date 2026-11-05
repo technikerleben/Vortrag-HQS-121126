@@ -135,6 +135,21 @@ figure{margin:0}
 .qr-box{background:white;border-radius:26px;padding:34px;box-shadow:0 0 0 2px var(--line)}
 .qr-box .qr{display:block;width:440px;height:440px}
 .qr-box figcaption{font:600 24px Jost,sans-serif;color:var(--muted);text-align:center;margin-top:18px}
+.scale{position:relative;margin-top:120px;height:84px}
+.sc-above{position:absolute;bottom:calc(100% + 26px);font:500 24px/1.25 Jost,sans-serif;color:var(--muted);white-space:nowrap}
+.sc-above b{color:var(--navy);font-weight:700}
+.sc-srl b{color:var(--red)}
+.sc-track{position:absolute;left:0;right:0;top:0;height:22px;border-radius:11px;background:#E3E7EC}
+.sc-zone{position:absolute;top:0;bottom:0;border-radius:0 11px 11px 0;background:#D3DCE6}
+.sc-band{position:absolute;top:-8px;bottom:-8px;border-radius:9px;background:var(--red);transform-origin:left center}
+.sc-hinge{position:absolute;top:-30px;bottom:-14px;width:4px;margin-left:-2px;background:var(--navy);border-radius:2px}
+.sc-ticks{position:absolute;left:0;right:0;top:36px}
+.sc-ticks span{position:absolute;transform:translateX(-50%);font:600 22px Jost,sans-serif;color:var(--navy);text-align:center}
+.sc-ticks span:first-child{transform:none}
+.sc-ticks span:last-child{transform:translateX(-100%)}
+.sc-ticks i{display:block;font:500 20px Jost,sans-serif;font-style:normal;color:var(--muted)}
+.scale.stag .sc-band{animation:grow .8s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 300ms)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:none}}
 .dotted li{display:grid;grid-template-columns:38px 1fr;align-items:baseline}
 .dotted li::before{content:"";width:16px;height:16px;border-radius:5px;background:var(--red);transform:translateY(-.12em)}
 
@@ -416,16 +431,30 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 
 <section class="slide" data-title="Wirksamkeit">
   <p class="label">Warum sich das lohnt</p>
-  <h2 class="h" style="font-size:190px;margin-bottom:10px">+<span class="count" data-to="7">7</span> <em>Monate</em></h2>
-  <p class="kw">zusätzlicher Lernfortschritt im Schuljahr – bei sehr geringen Kosten.</p>
-  <p class="src" style="margin-top:60px;font-size:22px">Education Endowment Foundation (EEF), Teaching and Learning Toolkit: „Metacognition and self-regulation“ · Auswertung von 246 Studien · <a href="https://educationendowmentfoundation.org.uk/education-evidence/teaching-learning-toolkit/metacognition-and-self-regulation">educationendowmentfoundation.org.uk</a></p>
+  <h2 class="h" style="font-size:140px;margin-bottom:4px">d ≈ <em><span class="count" data-to="0.6" data-dec="1">0,6</span></em></h2>
+  <p class="kw" style="font-size:40px">Effektstärke von SRL und Metakognition – deutlich über dem Durchschnitt.</p>
+  <div class="scale">
+    <div class="sc-above" style="left:40%;transform:translateX(-100%);text-align:right;padding-right:14px">Durchschnitt aller Maßnahmen<br><b>0,40</b> (Hattie)</div>
+    <div class="sc-above sc-srl" style="left:52%;padding-left:6px">SRL &amp; Metakognition<br><b>0,52–0,61</b> (Hattie, EEF)</div>
+    <div class="sc-track">
+      <div class="sc-zone" style="left:40%;right:0"></div>
+      <div class="sc-band" style="left:52%;width:9%"></div>
+      <div class="sc-hinge" style="left:40%"></div>
+    </div>
+    <div class="sc-ticks">
+      <span style="left:0%">0</span><span style="left:20%">0,2<i>klein</i></span><span style="left:40%">0,4</span>
+      <span style="left:50%">0,5<i>mittel</i></span><span style="left:60%">0,6</span><span style="left:80%">0,8<i>groß</i></span><span style="left:100%">1,0</span>
+    </div>
+  </div>
+  <p class="sm" style="margin-top:40px">Zum Vergleich: Die EEF übersetzt d = 0,53–0,61 als <b style="color:var(--navy)">„+7 Monate“</b> zusätzlichen Lernfortschritt im Schuljahr – gegenüber ähnlichen Lernenden ohne diese Förderung.</p>
+  <p class="src" style="margin-top:22px;font-size:20px">Hattie, Visible Learning (Stand 2017): metakognitive Strategien 0,60, Selbstregulationsstrategien 0,52, Durchschnitt 0,40 · <a href="https://visible-learning.org/hattie-ranking-influences-effect-sizes-learning-achievement/">visible-learning.org</a> · EEF Teaching and Learning Toolkit 2025, 246 Studien · <a href="https://educationendowmentfoundation.org.uk/education-evidence/teaching-learning-toolkit/metacognition-and-self-regulation">educationendowmentfoundation.org.uk</a> · Einordnung klein/mittel/groß nach Cohen</p>
   <aside class="notes">
     <ul>
-      <li>Das <b>Teaching and Learning Toolkit</b> der britischen Education Endowment Foundation fasst Forschung zu Unterrichtsansätzen zusammen.</li>
-      <li><b>Metakognition und Selbstregulation:</b> durchschnittlich etwa <b>+7 Monate</b> zusätzlicher Lernfortschritt über ein Schuljahr.</li>
-      <li>Kosten: sehr gering. Evidenz: hoch, aus 246 Studien – mit Abzug, weil viele Studien nicht unabhängig evaluiert wurden.</li>
-      <li>Kernsatz: Diese Ansätze helfen Lernenden, ausdrücklicher über ihr eigenes Lernen nachzudenken.</li>
-      <li>Wichtig: Durchschnittswert – die Wirkung hängt von der Umsetzung ab.</li>
+      <li><b>Effektstärke d</b> = wie weit eine Gruppe mit Förderung im Mittel vor einer vergleichbaren Gruppe ohne Förderung liegt, gemessen in Standardabweichungen.</li>
+      <li><b>Hattie</b> (Visible Learning): Durchschnitt aller untersuchten Einflüsse d = 0,40 („Hinge Point“). Darüber wirkt eine Maßnahme überdurchschnittlich. Metakognitive Strategien 0,60, Selbstregulationsstrategien 0,52.</li>
+      <li><b>EEF</b>: Metakognition und Selbstregulation durchschnittlich +7 Monate – das ist die Übersetzung von d = 0,53 bis 0,61, im Vergleich zu ähnlichen Lernenden ohne diese Förderung. Kosten sehr gering, 246 Studien.</li>
+      <li><b>Faustregel nach Cohen:</b> 0,2 klein · 0,5 mittel · 0,8 groß.</li>
+      <li><b>Ehrlich bleiben:</b> Durchschnittswerte über viele Studien; Hatties Methode (Meta-Analysen von Meta-Analysen) ist methodisch umstritten, bei der EEF wurden viele Studien nicht unabhängig evaluiert. Die Wirkung hängt von der Umsetzung ab.</li>
     </ul>
   </aside>
 </section>
@@ -853,7 +882,7 @@ function setSteps(sl,hidden){ sl.querySelectorAll('.step').forEach(el=>el.classL
 function stepInfo(){ const all=slides[index].querySelectorAll('.step').length, open=all-slides[index].querySelectorAll('.step.hidden').length; return {all,open}; }
 /* Bewegung: Richtung merken, alte Folie kurz ausblenden, Inhalte gestaffelt aufbauen */
 let navDir=1, leaveTimer;
-const STAG_SEL='.label,.h,.statement,.quote,.kw,.sm,.src,.kw-list>li,.terms>div,.grid3>div,.ways>div,.pairs>*,figure,.myth-art,.stackv .big,.stackv li,.buddy,.qr-box,.mark,.line';
+const STAG_SEL='.scale,.label,.h,.statement,.quote,.kw,.sm,.src,.kw-list>li,.terms>div,.grid3>div,.ways>div,.pairs>*,figure,.myth-art,.stackv .big,.stackv li,.buddy,.qr-box,.mark,.line';
 function animOff(){ return document.body.classList.contains('no-anim'); }
 function stagger(sl,anchored){
   sl.querySelectorAll('.stag,.draw').forEach(el=>el.classList.remove('stag','draw'));
@@ -868,9 +897,10 @@ function stagger(sl,anchored){
   });
   sl.querySelectorAll('.ways>div,.cover .line').forEach((el,j)=>{ el.style.setProperty('--i',j); void el.offsetWidth; el.classList.add('draw'); });
   const c=sl.querySelector('.count');
-  if(c&&navDir>0){ const to=+c.dataset.to,t0=performance.now(),d=650;
-    const step=t=>{ const p=Math.min(1,(t-t0-250)/d); c.textContent=p<=0?'0':Math.round(to*(1-Math.pow(1-p,3))); if(p<1)requestAnimationFrame(step); };
-    c.textContent='0'; requestAnimationFrame(step); }
+  if(c&&navDir>0){ const to=+c.dataset.to,dec=+(c.dataset.dec||0),t0=performance.now(),d=650;
+    const fmt=v=>v.toFixed(dec).replace('.',',');
+    const step=t=>{ const p=Math.min(1,(t-t0-250)/d); c.textContent=fmt(p<=0?0:to*(1-Math.pow(1-p,3))); if(p<1)requestAnimationFrame(step); };
+    c.textContent=fmt(0); requestAnimationFrame(step); }
 }
 function showSlide(i){
   const prev=index;
