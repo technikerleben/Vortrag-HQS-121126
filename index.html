@@ -150,6 +150,9 @@ figure{margin:0}
 .sc-ticks i{display:block;font:500 20px Jost,sans-serif;font-style:normal;color:var(--muted)}
 .scale.stag .sc-band{animation:grow .8s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 300ms)}
 @keyframes grow{from{transform:scaleX(0)}to{transform:none}}
+.blocks{gap:30px 80px;grid-template-rows:repeat(4,auto);grid-auto-flow:column}
+.blocks .kw{font-size:46px}
+.blocks small{display:block;font:500 26px/1.3 Jost,sans-serif;color:var(--muted);margin-top:4px}
 .dotted li{display:grid;grid-template-columns:38px 1fr;align-items:baseline}
 .dotted li::before{content:"";width:16px;height:16px;border-radius:5px;background:var(--red);transform:translateY(-.12em)}
 
@@ -668,24 +671,27 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 </section>
 
 <section class="slide" data-title="Erprobung">
-  <h2 class="h">Wir testen <em>Bausteine.</em></h2>
-  <div class="grid3 tried">
-    <div class="col"><p class="name">Deutsch</p>
-      <p class="kw">Lernwege</p><p class="sm">Etappen mit klarem nächstem Schritt</p>
-      <p class="kw">Kompetenzraster</p><p class="sm">Kriterien und Lernstand sichtbar</p></div>
-    <div class="col"><p class="name">Technik</p>
-      <p class="kw">Lernnavigatoren</p><p class="sm">digitale Lernwege mit Hilfen</p>
-      <p class="kw">Werkstatt</p><p class="sm">Projektarbeit mit Reflexionsphasen</p></div>
-    <div class="col"><p class="name">Jahrgang 5</p>
-      <p class="kw">Lernbuddy</p><p class="sm">Planung, Durchführung, Reflexion auf einem Blatt</p>
-      <p class="kw">Lösungsleiter</p><p class="sm">Hilfe schrittweise selbstständiger nutzen</p></div>
-  </div>
+  <p class="label">Erprobung · vor allem im Jahrgang 5</p>
+  <h2 class="h" style="margin-bottom:44px">Wir testen <em>Bausteine.</em></h2>
+  <ul class="kw-list grid2 dotted blocks">
+    <li class="kw">Lernbuddy</li>
+    <li class="kw">Lösungsleiter</li>
+    <li class="kw">Lernwege und Lerntheken</li>
+    <li class="kw">Lernsettings öffnen</li>
+    <li class="kw"><span>Räume umgestalten<small>z. B. Lernbüro, Churer Modell</small></span></li>
+    <li class="kw"><span>Coaching<small>1:1-Mentorengespräche</small></span></li>
+    <li class="kw">Logbuch mit Lerntagebuch</li>
+  </ul>
   <aside class="notes">
     <ul>
-      <li>Kein fertiges Modell – Unterricht als Entwicklungsraum.</li>
-      <li><b>Deutsch:</b> Lernwege in Etappen, Kompetenzraster, Gelingensnachweise, gezielte Übungs- und Rückmeldephasen.</li>
-      <li><b>Technik:</b> digitale Lernnavigatoren, Projekt- und Werkstattarbeit, Strategie- und Reflexionsphasen, analoge Materialien mit digitalen Hilfen verknüpft.</li>
-      <li><b>Jahrgang 5:</b> Lernbuddy und Lösungsleiter, Strategiekarten, Lernjournal, Mentorengespräche, gemeinsame Sprache über Lernen.</li>
+      <li>Kein fertiges Modell – wir erproben Bausteine, vor allem im Jahrgang 5.</li>
+      <li><b>Lernbuddy:</b> Planung, Durchführung und Reflexion auf einem Blatt.</li>
+      <li><b>Lösungsleiter:</b> Hilfe schrittweise selbstständiger nutzen.</li>
+      <li><b>Lernwege und Lerntheken:</b> Etappen mit klarem nächstem Schritt, verlässlicher Zugang zu Lernaufgaben.</li>
+      <li><b>Lernsettings öffnen</b> – schrittweise, mit Struktur.</li>
+      <li><b>Räume umgestalten:</b> z. B. Lernbüro, Churer Modell.</li>
+      <li><b>Coaching:</b> 1:1-Mentorengespräche.</li>
+      <li><b>Logbuch mit Lerntagebuch.</b></li>
     </ul>
   </aside>
 </section>
