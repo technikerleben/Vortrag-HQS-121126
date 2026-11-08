@@ -272,6 +272,42 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
 .nv-foot b{color:#E6EEF5}
 .nv-warn{color:#FFB98A}
 
+/* ---------- Leseansicht fürs Handy: Folien untereinander, alles aufgedeckt ---------- */
+html.read,html.read body{overflow:auto;height:auto}
+.read #viewport{position:static;touch-action:auto;-webkit-user-select:text;user-select:text}
+.read #stage{position:static;width:auto;height:auto;transform:none}
+.read #progress,.read #menu,.read #jump,.read #black,.read #morphLayer{display:none!important}
+.read .slide{display:flex!important;position:relative;inset:auto;width:1000px;zoom:var(--z,.39);padding:90px 50px;justify-content:flex-start;border-bottom:2px solid var(--line)}
+.read .slide,.read .slide *{animation:none!important;transition:none!important}
+.read .step.hidden{opacity:1;transform:none}
+.read .myth-cover{transform:scaleX(0)}
+.read .slide.cover{padding:120px 50px}
+.read .cover .h{font-size:120px}
+.read .slide.full{padding:0;background:white;border:0}
+.read .slide.full img{height:auto}
+.read .slide.full .src,.read .ai-note{position:static;margin:16px 30px}
+.read .slide.kipper .src{margin:0;border-radius:0;padding:12px 30px}
+.read .label{font-size:30px}
+.read .sm{font-size:36px}
+.read .src{font-size:30px}
+.read .res-link{font-size:34px!important}
+.read .res-link .ico{width:32px;height:32px}
+.read .ai-note{font-size:28px}
+.read .split,.read .stackv,.read .thanks-grid,.read .grid2,.read .grid3,.read .ways,.read .blocks{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}
+.read .split,.read .thanks-grid{gap:50px}
+.read .split>figure,.read .split>.buddy-zoom{justify-self:center}
+.read .stackv{gap:40px}
+.read .stackv ul{padding-left:40px}
+.read .terms{grid-template-columns:1fr 1fr}
+.read .ways{gap:44px}
+.read .myth-art,.read .kipper-teaser{width:100%}
+.read .turbine,.read .turbine.big{width:900px;height:auto}
+.read .buddy{height:auto;width:100%;max-width:900px}
+.read .buddy-zoom+div{opacity:1!important}
+.read .qr-box{justify-self:start}
+.read .scale{margin-top:200px}
+.read .sc-above{font-size:28px;white-space:normal;width:300px}
+.read .sc-ticks span,.read .sc-ticks i{font-size:26px}
 body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{
@@ -919,6 +955,15 @@ const NOTES_MODE=new URLSearchParams(location.search).has('notes');
 /* ---------- Bühne skalieren ---------- */
 function fit(){ const s=Math.min(innerWidth/1600,innerHeight/900); document.documentElement.style.setProperty('--s',s); }
 addEventListener('resize',fit); fit();
+/* Leseansicht auf Handys (schmal hochkant oder flach quer) */
+const readMQ=matchMedia('(max-width:760px),(max-height:500px) and (orientation:landscape)');
+const isRead=()=>document.documentElement.classList.contains('read');
+function setRead(){
+  const on=readMQ.matches&&!new URLSearchParams(location.search).has('notes');
+  document.documentElement.classList.toggle('read',on);
+  document.documentElement.style.setProperty('--z',Math.min(1,innerWidth/1000));
+}
+readMQ.addEventListener('change',setRead); addEventListener('resize',setRead); setRead();
 
 /* ---------- Fortschritt mit Kapitel-Markierungen ---------- */
 const progress=document.getElementById('progress'),bar=progress.querySelector('.bar');
@@ -1091,7 +1136,7 @@ menu.addEventListener('click',e=>{
 /* ---------- Tastatur ---------- */
 let typed='',typedTimer;
 document.addEventListener('keydown',e=>{
-  if(NOTES_MODE) return;
+  if(NOTES_MODE||isRead()) return;
   if(jump.classList.contains('open')){ if(e.key==='Escape'){closeJump();e.preventDefault();} return; }
   const k=e.key;
   if(/^[0-9]$/.test(k)){ typed+=k; clearTimeout(typedTimer); typedTimer=setTimeout(()=>typed='',2000); return; }
@@ -1134,6 +1179,7 @@ vp.addEventListener('touchmove',e=>{
 vp.addEventListener('touchend',e=>{
   for(const t of e.changedTouches){ const s0=tStart[t.identifier]; if(s0&&Math.hypot(t.clientX-s0[0],t.clientY-s0[1])>30) tMoved=true; delete tStart[t.identifier]; }
   if(e.touches.length) return;                       // erst reagieren, wenn alle Finger weg sind
+  if(isRead()) return;                               // Leseansicht: normales Scrollen
   const t=e.changedTouches[0], dt=Date.now()-t0t, black=document.getElementById('black');
   if(tFingers>=2){ if(!tMoved&&dt<500) black.classList.toggle('on'); return; }
   const dx=t.clientX-t0x, dy=t.clientY-t0y, adx=Math.abs(dx), ady=Math.abs(dy);
