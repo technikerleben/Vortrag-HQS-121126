@@ -197,6 +197,9 @@ figure{margin:0}
 #morphLayer{position:absolute;inset:0;z-index:40;pointer-events:none}
 .morph-clone{position:absolute;margin:0;line-height:normal;white-space:nowrap;transform-origin:0 0;will-change:transform,opacity}
 .morph-hide{visibility:hidden}
+[data-morph]{display:inline-block}
+.flash{animation:flash .56s ease-in-out both}
+@keyframes flash{0%,100%{transform:none}35%,60%{transform:scale(1.14);color:var(--red);text-shadow:0 0 18px rgba(201,119,58,.55)}}
 
 /* Forschung / Erprobung */
 .col .name{font:400 60px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 10px}
@@ -1008,7 +1011,17 @@ function showSlide(i){
 function forward(){
   const nx=slides[index].querySelector('.step.hidden');
   if(nx){ nx.classList.remove('hidden'); markDone(slides[index]); broadcast(); return; }
-  if(index<slides.length-1){ navDir=1; setSteps(slides[index+1],true); showSlide(index+1); }
+  if(index<slides.length-1){ flashThen(slides[index],slides[index+1],()=>{ navDir=1; setSteps(slides[index+1],true); showSlide(index+1); }); }
+}
+/* Vor dem Flug blinkt der Begriff kurz auf, damit der Blick ihm folgt */
+let flashing=false;
+function flashThen(from,to,go){
+  if(flashing) return;
+  const src=[...from.querySelectorAll('[data-morph]')].filter(s=>to.querySelector('[data-morph="'+s.dataset.morph+'"]'));
+  if(!src.length||animOff()||reduceMotion.matches){ go(); return; }
+  flashing=true;
+  src.forEach(s=>{ s.classList.remove('flash'); void s.offsetWidth; s.classList.add('flash'); });
+  setTimeout(()=>{ src.forEach(s=>s.classList.remove('flash')); flashing=false; if(slides[index]===from) go(); },560);
 }
 function backward(){ if(index>0){ navDir=-1; setSteps(slides[index-1],false); showSlide(index-1); } }
 function goTo(i){ i=Math.max(0,Math.min(slides.length-1,i)); if(i===index)return; navDir=i>index?1:-1; setSteps(slides[i],i>index); showSlide(i); }
