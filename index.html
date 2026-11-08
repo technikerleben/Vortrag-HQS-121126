@@ -272,6 +272,10 @@ body.notes-mode #notesView{display:grid;grid-template-rows:auto 1fr auto;min-hei
 .nv-foot b{color:#E6EEF5}
 .nv-warn{color:#FFB98A}
 
+#readNote{display:none}
+.read #readNote{display:block;padding:14px 18px;background:var(--navy);color:#DCE7F1;font:500 15px/1.45 Jost,sans-serif}
+.read #readNote b{color:#fff;font-weight:700}
+.read #readNote a{color:#FFB98A;font-weight:600}
 /* ---------- Leseansicht fürs Handy: Folien untereinander, alles aufgedeckt ---------- */
 html.read,html.read body{overflow:auto;height:auto}
 .read #viewport{position:static;touch-action:auto;-webkit-user-select:text;user-select:text}
@@ -321,6 +325,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 </style>
 </head>
 <body>
+<div id="readNote"><b>Mobile Ansicht</b> – alle Folien untereinander zum Lesen. Für die Ansicht als Folienpräsentation im Browser „Desktopversion“ wählen oder <a href="?folien">hier tippen</a>.</div>
 <div id="viewport"><div id="stage"><div id="morphLayer"></div>
 
 <section class="slide cover active" data-title="Titel" data-section="Einstieg" data-dark>
@@ -728,10 +733,10 @@ const NOTES_MODE=new URLSearchParams(location.search).has('notes');
 function fit(){ const s=Math.min(innerWidth/1600,innerHeight/900); document.documentElement.style.setProperty('--s',s); }
 addEventListener('resize',fit); fit();
 /* Leseansicht auf Handys (schmal hochkant oder flach quer) */
-const readMQ=matchMedia('(max-width:760px),(max-height:500px) and (orientation:landscape)');
+const readMQ=matchMedia('(max-width:760px),(max-height:500px) and (max-width:950px) and (orientation:landscape)');
 const isRead=()=>document.documentElement.classList.contains('read');
 function setRead(){
-  const on=readMQ.matches&&!new URLSearchParams(location.search).has('notes');
+  const q=new URLSearchParams(location.search), on=readMQ.matches&&!q.has('notes')&&!q.has('folien');
   document.documentElement.classList.toggle('read',on);
   document.documentElement.style.setProperty('--z',Math.min(1,innerWidth/1000));
 }
