@@ -192,6 +192,11 @@ figure{margin:0}
 .zs1:not(.hidden)~.split .buddy-zoom+div{opacity:0}
 .zs3:not(.hidden)~.split .buddy-zoom+div{opacity:1}
 .no-anim .buddy-zoom,.no-anim .buddy-zoom+div{transition:none}
+/* Wandernde Begriffe zwischen Folien */
+.slide.measure,.slide.measure *{animation:none!important;transition:none!important}
+#morphLayer{position:absolute;inset:0;z-index:40;pointer-events:none}
+.morph-clone{position:absolute;margin:0;line-height:normal;white-space:nowrap;transform-origin:0 0;will-change:transform,opacity}
+.morph-hide{visibility:hidden}
 
 /* Forschung / Erprobung */
 .col .name{font:400 60px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 10px}
@@ -277,7 +282,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 </style>
 </head>
 <body>
-<div id="viewport"><div id="stage">
+<div id="viewport"><div id="stage"><div id="morphLayer"></div>
 
 <section class="slide cover active" data-title="Titel" data-section="Einstieg" data-dark>
   <div class="mark">SRL</div>
@@ -510,7 +515,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   <h2 class="h">Ansätze aus der <em>Forschung</em></h2>
   <div class="grid3">
     <div class="col"><p class="name">Stebner</p><p class="sm">Uni Osnabrück</p><p class="kw">Strategien &amp; Implementierung</p><p class="sm res-link"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.ferdinand-stebner.de/" target="_blank" rel="noopener">ferdinand-stebner.de</a></p></div>
-    <div class="col"><p class="name">Karlen</p><p class="sm">Uni Zürich</p><p class="kw">Metakognition &amp; Motivation</p><p class="sm res-link"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.selbstreguliertes-lernen.uzh.ch/de.html" target="_blank" rel="noopener">selbstreguliertes-lernen.uzh.ch</a></p></div>
+    <div class="col"><p class="name"><span data-morph="karlen">Karlen</span></p><p class="sm">Uni Zürich</p><p class="kw">Metakognition &amp; Motivation</p><p class="sm res-link"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.selbstreguliertes-lernen.uzh.ch/de.html" target="_blank" rel="noopener">selbstreguliertes-lernen.uzh.ch</a></p></div>
     <div class="col"><p class="name">Wirth</p><p class="sm">Ruhr-Uni Bochum</p><p class="kw">Äußere Struktur &amp; Lernbuddy</p><p class="sm res-link"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.pe.ruhr-uni-bochum.de/erziehungswissenschaft/lllf/index.html.de" target="_blank" rel="noopener">pe.ruhr-uni-bochum.de</a></p></div>
   </div>
   <aside class="notes">
@@ -530,7 +535,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
       <p class="src">Karlen et al., Universität Zürich · <a href="https://www.selbstreguliertes-lernen.uzh.ch/de/fuer-lehrpersonen/lehrperson-themenbeitraege/was-ist-selbstreguliertes-lernen.html">selbstreguliertes-lernen.uzh.ch</a></p>
     </figure>
     <div>
-      <p class="label">Karlen et al. · Uni Zürich</p>
+      <p class="label"><span data-morph="karlen">Karlen</span> et al. · Uni Zürich</p>
       <h2 class="h">Die SRL-<em>Turbine</em></h2>
       <ol class="kw-list numbered">
         <li class="kw">Grundbedürfnisse</li>
@@ -657,7 +662,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   <h2 class="h" style="margin-bottom:18px;font-size:84px">Keine Methode, sondern ein <em>Bildungsziel.</em></h2>
   <p class="kw" style="font-size:44px;font-weight:500">Ein Kompetenzpaket – lernbar, nicht angeboren.</p>
   <div class="ways">
-    <div><p class="name">Strukturen</p><p class="kw">geben äußeren Halt</p><p class="sm">Lernbuddy · Lösungsleiter · Kompetenzraster</p></div>
+    <div><p class="name">Strukturen</p><p class="kw">geben äußeren Halt</p><p class="sm"><span data-morph="buddy">Lernbuddy</span> · Lösungsleiter · Kompetenzraster</p></div>
     <div><p class="name">Strategien</p><p class="kw">werden explizit gelernt und geübt</p><p class="sm">Strategiekarten · Lernwege</p></div>
     <div><p class="name">Routinen</p><p class="kw">machen Regulation zur Gewohnheit</p><p class="sm">Planung · Durchführung · Reflexion – immer wieder</p></div>
   </div>
@@ -680,7 +685,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
     <div class="buddy-zoom"><img class="buddy" src="assets/lernbuddy.webp" alt="Arbeitsblatt Lernbuddy der Klasse 5.3 mit Planung, Durchführung und Reflexion"></div>
     <div>
       <p class="label">Rahmengebendes Werkzeug</p>
-      <h2 class="h">Der <em>Lernbuddy.</em></h2>
+      <h2 class="h">Der <em><span data-morph="buddy">Lernbuddy.</span></em></h2>
       <p class="kw">Äußeres Gerüst →<br>innere Routine.</p>
       <p class="src" style="margin-top:60px;font-size:22px">Entwickelt von Prof. Joachim Wirth und Team, Ruhr-Universität Bochum – für die Klasse 5.3 von uns angepasst.</p>
     </div>
@@ -943,8 +948,44 @@ function stagger(sl,anchored){
     const step=t=>{ const p=Math.min(1,(t-t0-250)/d); c.textContent=fmt(p<=0?0:to*(1-Math.pow(1-p,3))); if(p<1)requestAnimationFrame(step); };
     c.textContent=fmt(0); requestAnimationFrame(step); }
 }
+/* Begriff wandert von einer Folie zur nächsten (data-morph="schlüssel") */
+const stageEl=document.getElementById('stage'),morphLayer=document.getElementById('morphLayer');
+const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)');
+function stageBox(el){ const sr=stageEl.getBoundingClientRect(),k=sr.width/1600,r=el.getBoundingClientRect();
+  return {x:(r.left-sr.left)/k,y:(r.top-sr.top)/k,w:r.width/k,h:r.height/k}; }
+function morphClone(el,b){ const cs=getComputedStyle(el),c=document.createElement('span');
+  c.className='morph-clone'; c.textContent=el.textContent;
+  ['fontFamily','fontSize','fontWeight','fontStyle','letterSpacing','textTransform','color'].forEach(p=>c.style[p]=cs[p]);
+  c.style.left=b.x+'px'; c.style.top=b.y+'px'; morphLayer.appendChild(c); return c; }
+let morphAnims=[];
+function clearMorph(){ morphAnims.forEach(a=>a.cancel()); morphAnims=[]; morphLayer.innerHTML=''; document.querySelectorAll('.morph-hide').forEach(e=>e.classList.remove('morph-hide')); }
+function prepMorph(from,to){
+  clearMorph();
+  if(animOff()||reduceMotion.matches||from===to) return null;
+  const pairs=[...from.querySelectorAll('[data-morph]')].map(s=>[s,to.querySelector('[data-morph="'+s.dataset.morph+'"]')]).filter(p=>p[1]);
+  if(!pairs.length) return null;
+  return pairs.map(([s,t])=>({s,t,sb:stageBox(s)}));
+}
+function runMorph(list,to){
+  if(!list) return;
+  to.classList.add('measure'); void to.offsetWidth;
+  list.forEach(m=>m.tb=stageBox(m.t));
+  to.classList.remove('measure');
+  const D=900,E='cubic-bezier(.65,0,.35,1)';
+  list.forEach(({s,t,sb,tb})=>{
+    const a=morphClone(s,sb),b=morphClone(t,tb);
+    const ka=tb.h/sb.h,kb=sb.h/tb.h;
+    s.classList.add('morph-hide'); t.classList.add('morph-hide');
+    morphAnims.push(
+      a.animate([{transform:'none',opacity:1},{opacity:1,offset:.35},{transform:`translate(${tb.x-sb.x}px,${tb.y-sb.y}px) scale(${ka})`,opacity:0}],{duration:D,easing:E,fill:'both'}),
+      b.animate([{transform:`translate(${sb.x-tb.x}px,${sb.y-tb.y}px) scale(${kb})`,opacity:0},{opacity:0,offset:.3},{transform:'none',opacity:1}],{duration:D,easing:E,fill:'both'})
+    );
+  });
+  Promise.all(morphAnims.map(a=>a.finished)).then(clearMorph,()=>{});
+}
 function showSlide(i){
   const prev=index;
+  const morph=prepMorph(slides[prev],slides[Math.max(0,Math.min(slides.length-1,i))]);
   index=Math.max(0,Math.min(slides.length-1,i));
   const from=slides[prev], to=slides[index];
   const anchored=prev!==index&&from.dataset.anchor&&from.dataset.anchor===to.dataset.anchor;
@@ -957,6 +998,7 @@ function showSlide(i){
   }
   slides.forEach((s,n)=>{ s.classList.remove('active'); if(n===index){ void s.offsetWidth; s.classList.add('active'); } });
   stagger(to,anchored);
+  runMorph(morph,to);
   markDone(slides[index]);
   bar.style.width=((index+1)/slides.length*100)+'%';
   document.body.classList.toggle('dark-slide','dark' in slides[index].dataset);
