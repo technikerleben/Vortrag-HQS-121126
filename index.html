@@ -182,6 +182,16 @@ figure{margin:0}
 .numbered li::before{content:counter(n);display:inline-grid;place-items:center;width:58px;height:58px;border-radius:14px;background:var(--navy);color:white;font:700 32px Jost,sans-serif;margin-right:26px;vertical-align:.08em}
 .arrows li+li::before{content:"↓";display:block;font:600 36px/1 Jost;color:var(--red);margin:-6px 0 14px 6px}
 .buddy{height:720px;width:auto;display:block;border-radius:10px;box-shadow:0 0 0 2px var(--line)}
+/* Lernbuddy: Klick 1 obere Hälfte, Klick 2 untere Hälfte, Klick 3 zurück */
+.zs{display:none!important}
+.buddy-zoom{position:relative;z-index:5;transform-origin:0 0;transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.buddy-zoom+div{transition:opacity .5s ease}
+.zs1:not(.hidden)~.split .buddy-zoom{transform:translate(57px,-80px) scale(2.444)}
+.zs2:not(.hidden)~.split .buddy-zoom{transform:translate(57px,-960px) scale(2.444)}
+.zs3:not(.hidden)~.split .buddy-zoom{transform:none}
+.zs1:not(.hidden)~.split .buddy-zoom+div{opacity:0}
+.zs3:not(.hidden)~.split .buddy-zoom+div{opacity:1}
+.no-anim .buddy-zoom,.no-anim .buddy-zoom+div{transition:none}
 
 /* Forschung / Erprobung */
 .col .name{font:400 60px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 10px}
@@ -665,8 +675,9 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 </section>
 
 <section class="slide" data-title="Lernbuddy">
+  <i class="step zs zs1"></i><i class="step zs zs2"></i><i class="step zs zs3"></i>
   <div class="split">
-    <img class="buddy" src="assets/lernbuddy.webp" alt="Arbeitsblatt Lernbuddy der Klasse 5.3 mit Planung, Durchführung und Reflexion">
+    <div class="buddy-zoom"><img class="buddy" src="assets/lernbuddy.webp" alt="Arbeitsblatt Lernbuddy der Klasse 5.3 mit Planung, Durchführung und Reflexion"></div>
     <div>
       <p class="label">Rahmengebendes Werkzeug</p>
       <h2 class="h">Der <em>Lernbuddy.</em></h2>
@@ -679,6 +690,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
       <li><b>Planung:</b> Ziel klären · Energie einschätzen · Ablenker erkennen · ersten Schritt bestimmen.</li>
       <li><b>Durchführung:</b> Strategie wählen · Arbeit beobachten · Lösungsleiter nutzen · bei Bedarf nachsteuern.</li>
       <li><b>Reflexion:</b> Ergebnis und Vorgehen prüfen · Erfolg benennen · nächsten Schritt ableiten.</li>
+      <li><b>Klicks:</b> 1 → obere Hälfte groß · 2 → untere Hälfte · 3 → zurück zur Folie.</li>
       <li>Der Lernbuddy ist nicht SRL. Er ist zunächst ein äußeres Gerüst, das langfristig innere Routinen unterstützen soll.</li>
       <li><b>Jahrgang 5:</b> Die Bereiche werden nacheinander eingeführt. Mehr Selbstregulation kann am Anfang mehr äußere Struktur bedeuten.</li>
     </ul>
