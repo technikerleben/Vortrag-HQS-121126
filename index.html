@@ -179,6 +179,11 @@ figure{margin:0}
 .turbine.big{width:760px;height:760px}
 .numbered{counter-reset:n}
 .numbered li{counter-increment:n}
+.rings li{display:flex;align-items:center;gap:26px}
+.rings small{display:block;font:500 24px/1.2 Jost,sans-serif;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.ring-ico{width:74px;height:74px;flex:none}
+.ring-ico .off{stroke:#CBD3DC}.ring-ico .off.fill{fill:#CBD3DC;stroke:none}
+.ring-ico .on{stroke:var(--orange)}.ring-ico .on.fill{fill:var(--orange);stroke:none}
 .numbered li::before{content:counter(n);display:inline-grid;place-items:center;width:58px;height:58px;border-radius:14px;background:var(--navy);color:white;font:700 32px Jost,sans-serif;margin-right:26px;vertical-align:.08em}
 .arrows li+li::before{content:"↓";display:block;font:600 36px/1 Jost;color:var(--red);margin:-6px 0 14px 6px}
 .buddy{height:720px;width:auto;display:block;border-radius:10px;box-shadow:0 0 0 2px var(--line)}
@@ -507,10 +512,10 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
     <div>
       <p class="label"><span data-morph="karlen">Karlen</span> et al. · Uni Zürich</p>
       <h2 class="h">Die SRL-<em>Turbine</em></h2>
-      <ol class="kw-list numbered">
-        <li class="kw">Grundbedürfnisse</li>
-        <li class="kw">Lernprozess</li>
-        <li class="kw">Kompetenzbereiche</li>
+      <ol class="kw-list rings">
+        <li class="kw"><svg class="ring-ico" viewBox="0 0 64 64" aria-hidden="true"><circle class="off" cx="32" cy="32" r="27" fill="none" stroke-width="8"/><circle class="off" cx="32" cy="32" r="16.5" fill="none" stroke-width="7"/><circle class="on fill" cx="32" cy="32" r="8"/></svg><span>Grundbedürfnisse<small>innen</small></span></li>
+        <li class="kw"><svg class="ring-ico" viewBox="0 0 64 64" aria-hidden="true"><circle class="off" cx="32" cy="32" r="27" fill="none" stroke-width="8"/><circle class="on" cx="32" cy="32" r="16.5" fill="none" stroke-width="7"/><circle class="off fill" cx="32" cy="32" r="8"/></svg><span>Lernprozess<small>mittlerer Ring</small></span></li>
+        <li class="kw"><svg class="ring-ico" viewBox="0 0 64 64" aria-hidden="true"><circle class="on" cx="32" cy="32" r="27" fill="none" stroke-width="8"/><circle class="off" cx="32" cy="32" r="16.5" fill="none" stroke-width="7"/><circle class="off fill" cx="32" cy="32" r="8"/></svg><span>Kompetenzbereiche<small>außen</small></span></li>
       </ol>
     </div>
   </div>
