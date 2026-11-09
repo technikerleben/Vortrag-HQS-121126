@@ -114,6 +114,12 @@ figure{margin:0}
 .myth .split{gap:70px}
 .myth .h{font-size:74px;margin-bottom:44px}
 .myth .kw{font-size:46px}
+/* Salbeigrün = was stimmt, wirkt, gelingt */
+.myth .kw.step{position:relative;border-left:8px solid var(--sage-dark);padding:6px 0 6px 92px;border-radius:4px}
+.myth .kw.step::before{content:"";position:absolute;left:26px;top:50%;width:46px;height:46px;margin-top:-23px;border-radius:50%;background:var(--sage-dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/30px no-repeat}
+.checks li{padding-left:84px;text-indent:-84px}
+.checks li::before{content:"";display:inline-block;width:58px;height:58px;vertical-align:-.28em;border-radius:14px;background:var(--sage-dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/38px no-repeat;margin-right:26px}
+.recs.dotted li::before{background:var(--sage-dark)}
 
 /* SRL ist … */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px 80px}
@@ -129,7 +135,7 @@ figure{margin:0}
 .stackv .big{font:400 190px/0.95 Anton,sans-serif;color:var(--navy);margin:0}
 .stackv ul{list-style:none;margin:0;padding:0 0 0 60px;border-left:6px solid var(--line);display:grid;gap:12px}
 .stackv li{font:600 54px/1.15 Jost,sans-serif;color:var(--navy)}
-.stackv li.all{margin-top:18px;justify-self:start;background:var(--red);color:white;padding:10px 30px;border-radius:14px}
+.stackv li.all{margin-top:18px;justify-self:start;background:var(--sage-dark);color:white;padding:10px 30px;border-radius:14px}
 .recs{gap:22px}
 .recs .kw{font-size:44px}
 .thanks-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:90px;align-items:center}
@@ -141,10 +147,10 @@ figure{margin:0}
 .scale{position:relative;margin-top:120px;height:84px}
 .sc-above{position:absolute;bottom:calc(100% + 26px);font:500 24px/1.25 Jost,sans-serif;color:var(--muted);white-space:nowrap}
 .sc-above b{color:var(--navy);font-weight:700}
-.sc-srl b{color:var(--red)}
+.sc-srl b{color:var(--ink)}
 .sc-track{position:absolute;left:0;right:0;top:0;height:22px;border-radius:11px;background:var(--slate-ghost)}
 .sc-zone{position:absolute;top:0;bottom:0;border-radius:0 11px 11px 0;background:var(--slate-pale)}
-.sc-band{position:absolute;top:-8px;bottom:-8px;border-radius:9px;background:var(--red);transform-origin:left center}
+.sc-band{position:absolute;top:-8px;bottom:-8px;border-radius:9px;background:var(--sage-dark);transform-origin:left center}
 .sc-hinge{position:absolute;top:-30px;bottom:-14px;width:4px;margin-left:-2px;background:var(--navy);border-radius:2px}
 .sc-ticks{position:absolute;left:0;right:0;top:36px}
 .sc-ticks span{position:absolute;transform:translateX(-50%);font:600 22px Jost,sans-serif;color:var(--navy);text-align:center}
@@ -491,7 +497,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 <section class="slide" data-title="Was wirkt">
   <p class="label">Was laut EEF wirkt</p>
   <h2 class="h">Was <em>wirkt?</em></h2>
-  <ol class="kw-list numbered" style="gap:30px">
+  <ol class="kw-list checks" style="gap:30px">
     <li class="kw">Strategien <em>explizit</em> unterrichten</li>
     <li class="kw">Eigenes Denken <em>vormachen</em></li>
     <li class="kw">Anspruchsvolle Aufgaben <em>im Fachunterricht</em></li>
