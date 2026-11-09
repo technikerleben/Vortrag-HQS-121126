@@ -203,6 +203,16 @@ figure{margin:0}
 
 /* Forschung / Erprobung */
 .col .name{font:400 60px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 10px}
+.books{gap:60px;align-items:start}
+.book{display:flex;flex-direction:column;border-top:3px solid var(--navy);padding-top:22px}
+.book .who{font:600 21px/1.3 Jost,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
+.book .name{font-size:44px;margin-bottom:8px}
+.book .sm{font-size:26px}
+.book .desc{font:400 27px/1.4 Jost,sans-serif;color:var(--ink);margin:20px 0 0}
+.book .res-link .pub{color:var(--muted);margin-right:14px}
+.read .book .desc{font-size:36px}
+.read .book .sm{font-size:34px}
+.read .book .who{font-size:26px}
 .col .sm{margin-bottom:18px}
 .col .kw{font-size:40px;line-height:1.3}
 .bottom{margin-top:70px}
@@ -652,6 +662,16 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 
 <section class="slide" data-title="Pointe">
   <p class="statement">Nicht alles auf einmal.<br><em>Aber gemeinsam und Schritt&nbsp;für&nbsp;Schritt.</em></p>
+</section>
+
+<section class="slide" data-title="Literatur">
+  <p class="label">Zum Weiterlesen</p>
+  <h2 class="h" style="margin-bottom:44px;font-size:100px">Literatur&shy;<em>empfehlungen.</em></h2>
+  <div class="grid3 books">
+    <div class="col book"><p class="who">Yves Karlen</p><p class="name">Gewusst wie!</p><p class="sm">Selbstreguliertes Lernen im Schulalltag verankern</p><p class="desc">Das Buch von Prof. Karlen und Team.</p><p class="sm res-link"><span class="pub">hep Verlag · 2026</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.hep-verlag.ch/gewusst-wie" target="_blank" rel="noopener">hep-verlag.ch</a></p></div>
+    <div class="col book"><p class="who">Stefan Ruppaner · Anke Willers</p><p class="name">Das könnte Schule machen</p><p class="sm">Wie ein engagierter Pädagoge unser Bildungssystem revolutioniert</p><p class="desc">Einblick in eine der bekanntesten Schulen, die neue Konzepte eingeführt hat: die Alemannenschule Wutöschingen.</p><p class="sm res-link"><span class="pub">Rowohlt · 2025</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://www.rowohlt.de/buch/stefan-ruppaner-anke-willers-das-koennte-schule-machen-9783499016394" target="_blank" rel="noopener">rowohlt.de</a></p></div>
+    <div class="col book"><p class="who">Institut für zeitgemäße Prüfungskultur (Hrsg.)</p><p class="name">Wege zu einer zeitgemäßen Prüfungskultur</p><p class="sm">Grundlagen und Praxisbeispiele</p><p class="desc">Das Buch zum Thema zeitgemäße Prüfungskultur.</p><p class="sm res-link"><span class="pub">Beltz · 2024</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg><a href="https://pruefungskultur.de/buch/" target="_blank" rel="noopener">pruefungskultur.de</a></p></div>
+  </div>
 </section>
 
 <section class="slide full kipper" data-title="Muldenkipper" data-dark>
