@@ -199,6 +199,8 @@ figure{margin:0}
 .ring-ico .off{stroke:var(--slate-pale)}.ring-ico .off.fill{fill:var(--slate-pale);stroke:none}
 .ring-ico .on{stroke:var(--sage-dark)}.ring-ico .on.fill{fill:var(--sage-dark);stroke:none}
 .numbered li::before{content:counter(n);display:inline-grid;place-items:center;width:58px;height:58px;border-radius:14px;background:var(--navy);color:white;font:700 32px Jost,sans-serif;margin-right:26px;vertical-align:.08em}
+.cyc{position:relative;width:max-content;padding-right:120px}
+.cyc-back{position:absolute;right:0;top:0;width:120px;height:100%;overflow:visible}
 .arrows li+li::before{content:"↓";display:block;font:600 36px/1 Jost;color:var(--sage-dark);margin:-6px 0 14px 6px}
 .buddy{height:720px;width:auto;display:block;border-radius:10px;box-shadow:0 0 0 2px var(--line)}
 /* Lernbuddy: Klick 1 obere Hälfte, Klick 2 untere Hälfte, Klick 3 zurück */
@@ -573,11 +575,14 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
     <div>
       <p class="label">Ebene 2 · Lernprozess</p>
       <h2 class="h">Der <em>Zyklus.</em></h2>
+      <div class="cyc">
       <ul class="kw-list arrows" style="gap:14px">
         <li class="kw">Planung</li>
         <li class="kw">Durchführung</li>
         <li class="kw">Reflexion</li>
       </ul>
+      <svg class="cyc-back" viewBox="0 0 120 306" aria-hidden="true"><defs><marker id="cycHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sage-dark)"/></marker></defs><path d="M-80 274 C 40 274, 88 236, 88 152 S 40 31, -106 31" fill="none" stroke="var(--sage-dark)" stroke-width="5" stroke-linecap="round" marker-end="url(#cycHead)"/></svg>
+      </div>
     </div>
   </div>
 </section>
