@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beamertest · SRL ist keine Methode!</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:Anton;src:url(assets/fonts/anton.woff2) format("woff2");font-display:block}
+@font-face{font-family:Jost;src:url(assets/fonts/jost.woff2) format("woff2");font-weight:100 900;font-display:block}
+:root{
+  --slate-dark:#2C3D4C;--slate-base:#3E5668;--slate-mid:#6A8599;--slate-pale:#D0DCE6;--slate-ghost:#EEF3F7;
+  --rust-dark:#9E4E22;--rust-base:#D97A4A;--rust-mid:#EBA882;--rust-pale:#F5DDD1;
+  --sage-dark:#4D8B3F;--sage-base:#7DBB6F;--sage-mid:#A8D49D;
+  --bg:#F5F4F1;--text:#1E2A35;--muted:#5A6A78;--line:rgba(44,61,76,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Jost,sans-serif;color:var(--text)}
+#vp{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1600px;height:900px;transform:scale(var(--s,1));transform-origin:center;position:relative;flex:none}
+.pg{position:absolute;inset:0;background:var(--bg);padding:70px 110px;display:none}
+.pg.on{display:block}
+.pg.dark{background:var(--slate-dark);color:#fff}
+.corner{position:absolute;width:46px;height:46px;border:0 solid var(--rust-dark)}
+.corner.tl{top:12px;left:12px;border-top-width:5px;border-left-width:5px}
+.corner.tr{top:12px;right:12px;border-top-width:5px;border-right-width:5px}
+.corner.bl{bottom:12px;left:12px;border-bottom-width:5px;border-left-width:5px}
+.corner.br{bottom:12px;right:12px;border-bottom-width:5px;border-right-width:5px}
+.dark .corner{border-color:var(--rust-mid)}
+.kick{font:700 30px/1 Jost;letter-spacing:.16em;text-transform:uppercase;color:var(--rust-dark);margin:0 0 14px}
+.dark .kick{color:var(--rust-mid)}
+h1{font:400 84px/1 Anton,sans-serif;color:var(--slate-dark);margin:0 0 34px}
+.dark h1{color:#fff}
+.foot{position:absolute;left:110px;right:110px;bottom:34px;display:flex;justify-content:space-between;font:500 22px Jost;color:var(--muted)}
+.dark .foot{color:var(--slate-pale)}
+/* Seite 1: Farben */
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.sw div{border-radius:14px;padding:18px 20px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.sw b{font:400 44px/1 Anton,sans-serif}
+.sw span{font:600 22px/1.3 Jost}
+.uses{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:12px 60px}
+.uses p{margin:0;font:600 34px/1.3 Jost}
+/* Seite 2: Schrift */
+.ty{display:grid;gap:6px}
+.ty .row{display:grid;grid-template-columns:150px 1fr;align-items:baseline;gap:20px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.ty .px{font:600 20px Jost;color:var(--muted);text-align:right}
+.ty p{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Seite 3: Kontrast */
+.ramp{display:grid;grid-template-columns:repeat(11,1fr);height:110px;border-radius:12px;overflow:hidden;margin-bottom:12px}
+.ramp div{display:grid;place-items:end center;padding-bottom:8px;font:600 18px Jost}
+.lines{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:34px}
+.lines .box{height:150px;border-radius:12px;background:#fff}
+.lines p{margin:10px 0 0;font:600 24px Jost;color:var(--slate-pale)}
+.chk{margin-top:34px;font:500 30px/1.45 Jost;color:#fff}
+.chk b{color:var(--rust-mid)}
+.chk .ok{color:var(--sage-mid)}
+#hint{position:fixed;left:50%;top:14px;transform:translateX(-50%);font:500 14px Jost,sans-serif;color:#999;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:8px;transition:opacity .6s}
+</style>
+</head>
+<body>
+<div id="vp"><div id="stage">
+
+<section class="pg on">
+  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  <p class="kick">Beamertest 1 / 3 · Farben</p>
+  <h1>Sind alle Farben <span style="color:var(--rust-base)">unterscheidbar?</span></h1>
+  <div class="sw">
+    <div style="background:var(--slate-dark);color:#fff"><b>Schieferblau</b><span>Überschriften · #2C3D4C</span></div>
+    <div style="background:var(--rust-base);color:#1E2A35"><b>Rostorange</b><span>große Akzentwörter · #D97A4A</span></div>
+    <div style="background:var(--rust-dark);color:#fff"><b>Rost dunkel</b><span>Labels, kleine Akzente · #9E4E22</span></div>
+    <div style="background:var(--sage-dark);color:#fff"><b>Salbeigrün</b><span>was wirkt, gelingt · #4D8B3F</span></div>
+  </div>
+  <div class="uses">
+    <p style="color:var(--slate-dark)">Schieferblau als Text – gut lesbar?</p>
+    <p style="color:var(--rust-base)">Rostorange als Text – noch kräftig?</p>
+    <p style="color:var(--rust-dark)">Rost dunkel als Text – klar vom Orange getrennt?</p>
+    <p style="color:var(--sage-dark)">Salbeigrün als Text – nicht zu blass?</p>
+    <p style="color:var(--muted)">Grau für Nebentext und Quellen</p>
+    <p style="color:var(--text)">Fließtext in Dunkelgrau</p>
+  </div>
+  <div class="foot"><span>Alle vier Ecken sichtbar? Dann passt das Bild auf die Leinwand.</span><span>→ weiter</span></div>
+</section>
+
+<section class="pg">
+  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  <p class="kick">Beamertest 2 / 3 · Schriftgrößen der Präsentation</p>
+  <div class="ty">
+    <div class="row"><span class="px">Anton 120</span><p style="font:400 120px/1.05 Anton;color:var(--slate-dark)">Die SRL-<span style="color:var(--rust-base)">Turbine</span></p></div>
+    <div class="row"><span class="px">Anton 74</span><p style="font:400 74px/1.1 Anton;color:var(--slate-dark)">„Die Lehrkraft <span style="color:var(--rust-base)">zieht sich zurück.</span>“</p></div>
+    <div class="row"><span class="px">Jost 52</span><p style="font:600 52px/1.25 Jost;color:var(--text)">Strategien <span style="color:var(--rust-dark)">explizit</span> unterrichten</p></div>
+    <div class="row"><span class="px">Jost 40</span><p style="font:600 40px/1.25 Jost;color:var(--text)">Ändert sich die eigene Rolle im Raum, entstehen Freiräume.</p></div>
+    <div class="row"><span class="px">Jost 30 · Label</span><p style="font:700 30px/1.3 Jost;letter-spacing:.16em;text-transform:uppercase;color:var(--rust-dark)">Erprobung · vor allem im Jahrgang 5</p></div>
+    <div class="row"><span class="px">Jost 28</span><p style="font:500 28px/1.35 Jost;color:var(--muted)">Lernbuddy · Lösungsleiter · Kompetenzraster</p></div>
+    <div class="row"><span class="px">Jost 22 · Quelle</span><p style="font:400 22px/1.4 Jost;color:var(--muted)">Karlen et al., Universität Zürich · selbstreguliertes-lernen.uzh.ch</p></div>
+    <div class="row"><span class="px">Jost 20 · klein</span><p style="font:400 20px/1.4 Jost;color:var(--muted)">Hattie, Visible Learning (Stand 2017) · Einordnung klein/mittel/groß nach Cohen</p></div>
+  </div>
+  <div class="foot"><span>Von der letzten Reihe aus: Bis zu welcher Zeile ist alles lesbar?</span><span>→ weiter</span></div>
+</section>
+
+<section class="pg dark">
+  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  <p class="kick">Beamertest 3 / 3 · Kontrast und Schärfe</p>
+  <h1>Helligkeit und <span style="color:var(--rust-mid)">Schärfe.</span></h1>
+  <div class="ramp">
+    <div style="background:#000;color:#666">0</div><div style="background:#1a1a1a;color:#777">10</div><div style="background:#333;color:#888">20</div><div style="background:#4d4d4d;color:#aaa">30</div><div style="background:#666;color:#ccc">40</div><div style="background:#808080;color:#eee">50</div><div style="background:#999;color:#222">60</div><div style="background:#b3b3b3;color:#222">70</div><div style="background:#ccc;color:#222">80</div><div style="background:#e6e6e6;color:#222">90</div><div style="background:#fff;color:#222">100</div>
+  </div>
+  <div class="ramp" style="grid-template-columns:repeat(5,1fr);height:70px">
+    <div style="background:var(--slate-ghost)"></div><div style="background:var(--slate-pale)"></div><div style="background:var(--slate-mid)"></div><div style="background:var(--slate-base)"></div><div style="background:#1F2C38"></div>
+  </div>
+  <div class="lines">
+    <div><div class="box" style="background:repeating-linear-gradient(90deg,#2C3D4C 0 1px,#fff 1px 4px)"></div><p>Feine Linien – flimmern sie?</p></div>
+    <div><div class="box" style="background:var(--bg);display:grid;place-items:center"><svg width="220" height="120" viewBox="0 0 220 120"><path d="M20 100 C 120 100, 190 80, 190 50 S 140 20, 40 20" fill="none" stroke="#4D8B3F" stroke-width="5" stroke-linecap="round"/><path d="M40 9.5 L40 30.5 L19 20 Z" fill="#4D8B3F"/></svg></div><p>Pfeile wie auf Folie 18</p></div>
+    <div><div class="box" style="background:var(--bg);display:grid;place-items:center;text-align:center"><span style="font:400 72px/1 Anton;color:var(--slate-dark)">Danke<span style="color:var(--rust-base)">schön!</span></span></div><p>Heller Hintergrund nicht gelblich?</p></div>
+  </div>
+  <p class="chk">Graustufen: Sind <b>alle 11 Felder</b> unterscheidbar? <span class="ok">Wenn 0 und 10 verschmelzen, ist der Beamer zu dunkel eingestellt.</span></p>
+  <div class="foot"><span>F Vollbild · ← → blättern · Esc beenden</span><span>Ende des Tests</span></div>
+</section>
+
+</div></div>
+<div id="hint">← → blättern · F Vollbild</div>
+<script>
+const stage=document.getElementById('stage'),pgs=[...document.querySelectorAll('.pg')];let i=0;
+function fit(){stage.style.setProperty('--s',Math.min(innerWidth/1600,innerHeight/900))}
+addEventListener('resize',fit);fit();
+function go(n){i=Math.max(0,Math.min(pgs.length-1,n));pgs.forEach((p,k)=>p.classList.toggle('on',k===i))}
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1)}
+  else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(i-1)}
+  else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})}
+});
+addEventListener('click',e=>go(e.clientX<innerWidth/3?i-1:i+1));
+setTimeout(()=>document.getElementById('hint').style.opacity=0,4000);
+</script>
+</body>
+</html>
