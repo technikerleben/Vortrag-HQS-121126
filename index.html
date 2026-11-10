@@ -201,7 +201,13 @@ figure{margin:0}
 .numbered li::before{content:counter(n);display:inline-grid;place-items:center;width:58px;height:58px;border-radius:14px;background:var(--navy);color:white;font:700 32px Jost,sans-serif;margin-right:26px;vertical-align:.08em}
 .cyc{position:relative;width:max-content;padding-right:120px}
 .cyc-back{position:absolute;right:0;top:0;width:120px;height:100%;overflow:visible}
-.arrows li+li::before{content:"↓";display:block;font:600 36px/1 Jost;color:var(--sage-dark);margin:-6px 0 14px 6px}
+.cyc-back.step.hidden{opacity:1;transform:none}
+.cyc-line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s var(--ease)}
+.cyc-head{opacity:0;transition:opacity .25s ease .75s}
+.cyc-back:not(.hidden) .cyc-line{stroke-dashoffset:0}
+.cyc-back:not(.hidden) .cyc-head{opacity:1}
+.read .cyc-line{stroke-dashoffset:0!important}.read .cyc-head{opacity:1!important}
+.arrows li+li::before{content:"";display:block;width:24px;height:52px;margin:-2px 0 12px 4px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 52'%3E%3Cpath d='M12 4V28' stroke='%234D8B3F' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M1.5 28H22.5L12 49Z' fill='%234D8B3F' stroke='%234D8B3F' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .buddy{height:720px;width:auto;display:block;border-radius:10px;box-shadow:0 0 0 2px var(--line)}
 /* Lernbuddy: Klick 1 obere Hälfte, Klick 2 untere Hälfte, Klick 3 zurück */
 .zs{display:none!important}
@@ -581,7 +587,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
         <li class="kw">Durchführung</li>
         <li class="kw">Reflexion</li>
       </ul>
-      <svg class="cyc-back" viewBox="0 0 120 306" aria-hidden="true"><defs><marker id="cycHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sage-dark)"/></marker></defs><path d="M-80 274 C 40 274, 88 236, 88 152 S 40 31, -106 31" fill="none" stroke="var(--sage-dark)" stroke-width="5" stroke-linecap="round" marker-end="url(#cycHead)"/></svg>
+      <svg class="cyc-back step" viewBox="0 0 120 306" aria-hidden="true"><path class="cyc-line" pathLength="1" d="M-80 274 C 40 274, 88 236, 88 152 S 40 31, -98 31" fill="none" stroke="var(--sage-dark)" stroke-width="5" stroke-linecap="round"/><path class="cyc-head" d="M-98 20.5 L-98 41.5 L-119 31 Z" fill="var(--sage-dark)" stroke="var(--sage-dark)" stroke-width="2" stroke-linejoin="round"/></svg>
       </div>
     </div>
   </div>
