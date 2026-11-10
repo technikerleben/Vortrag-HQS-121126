@@ -126,6 +126,12 @@ figure{margin:0}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 60px}
  .tried .kw{font-size:36px;margin-top:22px}
 .tried .sm{font-size:24px;margin:4px 0 0}
+.about{display:grid;grid-template-columns:1fr 560px;gap:70px;align-items:center}
+.about .h{font-size:84px;margin-bottom:34px}
+.about .kw-list{gap:16px}
+.about .kw{font-size:40px}
+.about-img{margin:0}
+.about-img img{display:block;width:560px;height:560px;border-radius:14px;box-shadow:0 2px 4px rgba(44,61,76,.12),0 18px 40px -16px rgba(44,61,76,.4)}
 .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:56px}
 .ways>div{padding-top:28px;background:linear-gradient(var(--sage-dark),var(--sage-dark)) left top/100% 6px no-repeat}
 .ways .name{font:400 58px/1.05 Anton,sans-serif;color:var(--navy);margin:0 0 14px}
@@ -324,7 +330,7 @@ html.read,html.read body{overflow:auto;height:auto}
 .read .res-link{font-size:34px!important}
 .read .res-link .ico{width:32px;height:32px}
 .read .ai-note{font-size:28px}
-.read .split,.read .stackv,.read .thanks-grid,.read .grid2,.read .grid3,.read .ways,.read .blocks{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}
+.read .about,.read .split,.read .stackv,.read .thanks-grid,.read .grid2,.read .grid3,.read .ways,.read .blocks{grid-template-columns:1fr!important;grid-template-rows:none;grid-auto-flow:row}
 .read .split,.read .thanks-grid{gap:50px}
 .read .split>figure,.read .split>.buddy-zoom{justify-self:center}
 .read .stackv{gap:40px}
@@ -333,6 +339,7 @@ html.read,html.read body{overflow:auto;height:auto}
 .read .ways{gap:44px}
 .read .myth-art,.read .kipper-teaser{width:100%}
 .read .turbine,.read .turbine.big{width:900px;height:auto}
+.read .about-img img{width:100%;height:auto}
 .read .buddy{height:auto;width:100%;max-width:900px}
 .read .buddy-zoom+div{opacity:1!important}
 .read .qr-box{justify-self:start}
@@ -369,6 +376,8 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 </section>
 
 <section class="slide" data-title="Kurz zu mir">
+ <div class="about">
+  <div>
   <p class="label">Kurz zu mir</p>
   <h2 class="h">Christoph Wegemann</h2>
   <ul class="kw-list dotted">
@@ -378,6 +387,9 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
     <li class="kw">Netzwerk Zukunftsschulen</li>
     <li class="kw">SRL-Pilot Jahrgang 5</li>
   </ul>
+  </div>
+  <figure class="about-img"><img src="assets/ueber-mich.webp" alt="Christoph Wegemann als Bausteinfigur in der Technikwerkstatt"></figure>
+ </div>
 </section>
 
 <section class="slide" data-title="Vorab">
